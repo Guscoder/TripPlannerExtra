@@ -1,0 +1,24 @@
+doctype html
+
+html(lang="en-US")
+
+  head
+    title Trip Planner
+    meta(charset="UTF-8")
+    link(rel="stylesheet" href="stylesheets/application.css")
+    script(src="/javascripts/application.js")
+  
+  body
+    header
+      h1 Trip Planner
+      block headerLinks
+    
+    - let messageTypes = Object.keys(flash || {});
+    if messageTypes.length > 0
+      ul
+        each messageType in messageTypes
+          each message in flash[messageType]
+            li.flash(class=messageType)= message
+
+    main
+      block main

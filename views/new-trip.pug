@@ -1,0 +1,22 @@
+extends layout
+
+block main
+  h1 Create New Trip
+
+  form(action="/newtrip/add", method="post")
+    dl
+      dt
+        label(for="tripTitle") Enter Trip Name:
+      dd
+        input(type="text" id="tripTitle" name="tripTitle" placeholder="Trip Title" value=tripTitle)
+      dt
+        label(for="startDate") Enter Trip Start Date:
+      dd
+        input(type="date" id="startDate" name="startDate" value=startDate)
+      dt
+        label(for="endDate") Enter Trip End Date:
+      dd
+        input(type="date" id="endDate" name="endDate" value=endDate)
+    fieldset
+      input(type="submit" value="Save")
+      a(href="/trips") Cancel

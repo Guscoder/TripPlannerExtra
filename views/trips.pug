@@ -1,0 +1,18 @@
+extends layout
+
+block headerLinks
+  a.add(href="/newtrip") Add New Trip
+
+block main
+
+  if tripList === undefined || tripList.length === 0
+    p#no_list You have no trips planned at all! Let's get planning!
+  
+  else
+    ul#triplist
+      each trip in tripList
+        li
+          a(href=`/trips/${trip.id}`)
+            h2 #{trip.tripTitle}
+          p Trip Begins: #{trip.startDate}
+          p Trip Ends: #{trip.endDate} 

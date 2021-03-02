@@ -1,0 +1,222 @@
+extend layout
+
+block headerLinks
+
+block main
+  h2 #{trip.tripTitle} 
+
+  h3 Add Trip Plans
+  button Hotel/Lodging
+  button Flight
+  button Car Rental
+  button Activity
+
+  div#hotel.addItem
+    form(action=`/trip/${trip.id}/add/hotel` method="post")
+      dl
+        dt
+          label(for="hotelName") Hotel Name:
+        dd
+          input(type="text" id="hotelName" name="hotelName" placeholder="Hotel Name" value=hotelName)
+        dt
+          label(for="city") Hotel Location:
+        dd
+          input(type="text" id="city" name="city" placeholder="City, State" value=city)
+        dt
+          label(for="address") Hotel Address:
+        dd
+          input(type="text" id="address" name="address" placeholder="Hotel Address" value=address)
+        dt
+          label(for="arrivalDate") Arrival Date:
+        dd
+          input(type="date" id="arrivalDate" name="arrivalDate" placeholder="Hotel Arrival Date" value=arrivalDate)
+        dt
+          label(for="departureDate") Departure Date:
+        dd
+          input(type="date" id="departureDate" name="departureDate" placeholder="Hotel Departure Date" value=departureDate)
+
+      fieldset.actions
+        input(type='submit' value="Save")
+        a(href="/trips") Cancel
+
+  div#carRental.addItem
+    form(action=`/trip/${trip.id}/add/carRental` method="post")
+      dl
+        dt
+          label(for="rentalCompany") Car Rental:
+        dd
+          input(type="text" id="rentalCompany" name="rentalCompany" placeholder="Car Rental Company Name" )
+        dt
+          label(for="city") Car Rental Location:
+        dd
+          input(type="text" id="city" name="city" placeholder="City, State" )
+        dt
+          label(for="address") Car Rental Company Address:
+        dd
+          input(type="address" id="address" name="address" placeholder="Car Company Address" )
+        dt
+          label(for="startDate") Pickup Date:
+        dd
+          input(type="date" id="startDate" name="startDate" placeholder="Car Rental Pickup Date" )
+        dt
+          label(for="pickupTime") Pickup Time:
+        dd
+          input(type="time" id="pickupTime" name="pickupTime" placeholder="Car Rental Pickup Date" )
+        dt
+          label(for="returnDate") Return Date:
+        dd
+          input(type="date" id="returnDate" name="returnDate" placeholder="Car Rental Return Date" )
+        dt
+          label(for="returnTime") Return Time:
+        dd
+          input(type="time" id="returnTime" name="returnTime" placeholder="Car Rental Pickup Date" )
+
+      fieldset.actions
+        input(type='submit' value="Save")
+        a(href="/trips") Cancel
+
+  div#flight.addItem
+    form(action=`/trip/${trip.id}/add/flight` method="post")
+      dl
+        dt
+          label(for="airline") Airline Name:
+        dd
+          input(type="text" id="airline" name="airline" placeholder="Airline Name" )
+        dt
+          label(for="flightNumber") Flight Number:
+        dd
+          input(type="number" id="flightNumber" name="flightNumber" placeholder="Flight Number" )
+        dt
+          label(for="departureAirport") Departure Airport:
+        dd
+          input(type="text" id="departureAirport" name="departureAirport" placeholder="Departure Airport" )
+        dt
+        dt
+          label(for="departureDate") Departure Date:
+        dd
+          input(type="date" id="departureDate" name="departureDate" placeholder="Flight Departure Date" )
+        dt
+          label(for="departureTime") Departure Time:
+        dd
+          input(type="time" id="departureTime" name="departureTime" placeholder="Flight Departure Time" )
+        dt
+          label(for="arrivalAirport") Arrival Airport:
+        dd
+          input(type="text" id="arrivalAirport" name="arrivalAirport" placeholder="Arrrival Airport" )
+        dt
+          label(for="arrivalDate") Arrival Date:
+        dd
+          input(type="date" id="arrivalDate" name="arrivalDate" placeholder="Flight Arrival Date" )
+        dt
+          label(for="arrivalTime") Arrival Time:
+        dd
+          input(type="time" id="arrivalTime" name="arrivalTime" placeholder="Flight Arrival Time" value=todoListTitle)
+        
+
+      fieldset.actions
+        input(type='submit' value="Save")
+        a(href="/trips") Cancel
+  
+  div#activity.addItem
+    form(action=`/trip/${trip.id}/add/activity` method="post")
+      dl
+        dt
+          label(for="organization") Organization:
+        dd
+          input(type="text" id="organization" name="organization" placeholder="Organization Name")
+        dt
+          label(for="activityName") Activity Name:
+        dd
+          input(type="text" id="activityName" name="activityName" placeholder="Activity Name")
+        dt
+          label(for="city") Activity Location:
+        dd
+          input(type="text" id="city" name="city" placeholder="City, State" )
+        dt
+          label(for="address") Activity Location Address:
+        dd
+          input(type="text" id="address" name="address" placeholder="Activity Address")
+        dt
+          label(for="activityDate") Activity Date:
+        dd
+          input(type="date" id="activityDate" name="activityDate" placeholder="Activity Date")
+        dt
+          label(for="startTime") Start Time:
+        dd
+          input(type="time" id="startTime" name="startTime" placeholder="Activity Start Time" )
+        dt
+          label(for="endTime") Start Time:
+        dd
+          input(type="time" id="endTime" name="endTime" placeholder="Activity End Time" )
+
+      fieldset.actions
+        input(type='submit' value="Save")
+        a(href="/trips") Cancel
+
+  .currentPlans
+    h2 Hotels
+
+    if hotelList === undefined || hotelList.length === 0
+      p You have no hotels booked yet. 
+    
+    else
+      ul
+        each hotel in hotelList
+          li #{hotel.hotelName}
+            ul
+              li #{hotel.city}
+              li #{hotel.address}
+              li #{hotel.arrivalDate}
+              li #{hotel.departureDate}
+    
+    h2 Car Rentals
+
+    if carRentalList === undefined || carRentalList.length === 0
+      p You have no cars booked yet. 
+    
+    else
+      ul
+        each car in carRentalList
+          li #{car.company}
+            ul
+              li #{car.city}
+              li #{car.address}
+              li #{car.startDate}
+              li #{car.pickupTime}
+              li #{car.returnDate}              
+              li #{car.endTime}
+
+    h2 Flights
+
+    if flightList === undefined || flightList.length === 0
+      p You have no cars booked yet. 
+    
+    else
+      ul
+        each flight in flightList
+          li #{flight.airline}
+            ul
+              li #{flight.flightNumber}
+              li #{flight.departureAirport}
+              li #{flight.departureDate}
+              li #{flight.departureTime}
+              li #{flight.arrivalAirport}
+              li #{flight.arrivalDate}              
+              li #{flight.arrivalTime}
+
+    h2 Activities
+
+    if activityList === undefined || activityList.length === 0
+      p You have no activities booked yet. 
+    
+    else
+      ul
+        each activity in activityList
+          li #{activity.activityName}
+            ul
+              li #{activity.organization}
+              li #{activity.city}
+              li #{activity.address}
+              li #{activity.startTime}
+              li #{activity.endTime}
+              li #{activity.date}              
